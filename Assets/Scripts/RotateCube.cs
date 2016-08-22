@@ -2,7 +2,6 @@ using UnityEngine;
 
 #if WINDOWS_UWP
 using DSLink.Nodes;
-using Newtonsoft.Json.Linq;
 #endif
 
 namespace DSHoloLens
@@ -32,8 +31,7 @@ namespace DSHoloLens
                 .BuildNode();
         }
 #endif
-
-        // Update is called once per frame
+        
         public void Update()
         {
             transform.Rotate(Vector3.up, 25f * Time.deltaTime);

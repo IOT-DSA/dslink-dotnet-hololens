@@ -11,7 +11,11 @@ namespace DSHoloLens
         public static HoloLensDSLink Instance;
 
         public HoloLensDSLink() : base(new Configuration(new List<string>(), "HoloLens", true, true,
-                    brokerUrl: "http://octocat.local:8080/conn", communicationFormat: "json", logLevel: LogLevel.Debug))
+                    brokerUrl: "http://octocat.local:8080/conn", communicationFormat: "json"
+#if DEBUG
+            , logLevel: LogLevel.Info
+#endif
+            ))
         {
         }
 
@@ -53,5 +57,4 @@ namespace DSHoloLens
         }
     }
 }
-
 #endif
