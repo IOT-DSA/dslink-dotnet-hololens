@@ -2,24 +2,26 @@ using UnityEngine;
 
 #if WINDOWS_UWP
 using DSLink.Nodes;
-using System.Threading.Tasks;
 #endif
 
 namespace DSHoloLens
 {
     public class ConnectedObject : MonoBehaviour
     {
+        public string DSANodeName = "ConnectedObject";
+
 #if WINDOWS_UWP
-        private Node doRotateDemoNode;
-        private Node positionX;
-        private Node positionY;
-        private Node positionZ;
-        private Node rotX;
-        private Node rotY;
-        private Node rotZ;
-        private Node scaleX;
-        private Node scaleY;
-        private Node scaleZ;
+        protected Node rootNode;
+        protected Node doRotateDemoNode;
+        protected Node positionX;
+        protected Node positionY;
+        protected Node positionZ;
+        protected Node rotX;
+        protected Node rotY;
+        protected Node rotZ;
+        protected Node scaleX;
+        protected Node scaleY;
+        protected Node scaleZ;
 
         private bool doRotateDemo;
         private float? pX;
@@ -34,12 +36,14 @@ namespace DSHoloLens
 
         public void Start()
         {
-            HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("unityPath")
+            rootNode = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild(DSANodeName).BuildNode();
+
+            rootNode.CreateChild("unityPath")
                 .SetType(ValueType.String)
                 .SetValue(GetObjectPath(transform))
                 .BuildNode();
 
-            doRotateDemoNode = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("doRotateDemo")
+            doRotateDemoNode = rootNode.CreateChild("doRotateDemo")
                 .SetType(ValueType.Boolean)
                 .SetValue(false)
                 .SetWritable(Permission.Config)
@@ -49,7 +53,7 @@ namespace DSHoloLens
                 doRotateDemo = value.Boolean;
             };
 
-            positionX = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("positionX")
+            positionX = rootNode.CreateChild("positionX")
                 .SetType(ValueType.Number)
                 .SetValue(transform.position.x)
                 .SetWritable(Permission.Write)
@@ -59,7 +63,7 @@ namespace DSHoloLens
                 pX = value.Float;
             };
 
-            positionY = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("positionY")
+            positionY = rootNode.CreateChild("positionY")
                 .SetType(ValueType.Number)
                 .SetValue(transform.position.y)
                 .SetWritable(Permission.Write)
@@ -69,7 +73,7 @@ namespace DSHoloLens
                 pY = value.Float;
             };
 
-            positionZ = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("positionZ")
+            positionZ = rootNode.CreateChild("positionZ")
                 .SetType(ValueType.Number)
                 .SetValue(transform.position.z)
                 .SetWritable(Permission.Write)
@@ -79,7 +83,7 @@ namespace DSHoloLens
                 pZ = value.Float;
             };
 
-            rotX = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("rotX")
+            rotX = rootNode.CreateChild("rotX")
                 .SetType(ValueType.Number)
                 .SetValue(transform.rotation.x)
                 .SetWritable(Permission.Write)
@@ -89,7 +93,7 @@ namespace DSHoloLens
                 rX = value.Float;
             };
 
-            rotY = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("rotY")
+            rotY = rootNode.CreateChild("rotY")
                 .SetType(ValueType.Number)
                 .SetValue(transform.rotation.y)
                 .SetWritable(Permission.Write)
@@ -99,7 +103,7 @@ namespace DSHoloLens
                 rY = value.Float;
             };
 
-            rotZ = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("rotZ")
+            rotZ = rootNode.CreateChild("rotZ")
                 .SetType(ValueType.Number)
                 .SetValue(transform.rotation.z)
                 .SetWritable(Permission.Write)
@@ -109,7 +113,7 @@ namespace DSHoloLens
                 rZ = value.Float;
             };
 
-            scaleX = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("scaleX")
+            scaleX = rootNode.CreateChild("scaleX")
                 .SetType(ValueType.Number)
                 .SetValue(transform.localScale.x)
                 .SetWritable(Permission.Write)
@@ -119,7 +123,7 @@ namespace DSHoloLens
                 sX = value.Float;
             };
 
-            scaleY = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("scaleY")
+            scaleY = rootNode.CreateChild("scaleY")
                 .SetType(ValueType.Number)
                 .SetValue(transform.localScale.y)
                 .SetWritable(Permission.Write)
@@ -129,7 +133,7 @@ namespace DSHoloLens
                 sY = value.Float;
             };
 
-            scaleZ = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("scaleZ")
+            scaleZ = rootNode.CreateChild("scaleZ")
                 .SetType(ValueType.Number)
                 .SetValue(transform.localScale.z)
                 .SetWritable(Permission.Write)
