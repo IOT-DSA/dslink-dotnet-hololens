@@ -1,8 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using UnityEngine.VR.WSA.Input;
+using Debug = System.Diagnostics.Debug;
 
 namespace HoloToolkit.Unity
 {
@@ -44,9 +46,11 @@ namespace HoloToolkit.Unity
         {
             // Create a new GestureRecognizer. Sign up for tapped events.
             gestureRecognizer = new GestureRecognizer();
-            gestureRecognizer.SetRecognizableGestures(GestureSettings.Tap);
+            gestureRecognizer.SetRecognizableGestures(GestureSettings.Tap | GestureSettings.Hold);
 
             gestureRecognizer.TappedEvent += GestureRecognizer_TappedEvent;
+            gestureRecognizer.HoldStartedEvent += GestureRecognizer_OnHoldStartedEvent;
+            gestureRecognizer.HoldCompletedEvent += GestureRecognizer_OnHoldCompletedEvent;
 
             // Start looking for gestures.
             gestureRecognizer.StartCapturingGestures();
@@ -60,9 +64,38 @@ namespace HoloToolkit.Unity
             }
         }
 
+        private void StartHold()
+        {
+            if (focusedObject != null)
+            {
+                focusedObject.SendMessage("OnHoldStart");
+            }
+        }
+
+        private void StopHold()
+        {
+            if (focusedObject != null)
+            {
+                focusedObject.SendMessage("OnHoldStop");
+            }
+        }
+
         private void GestureRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
         {
+            Debug.WriteLine("Tapped event");
             OnTap();
+        }
+
+        private void GestureRecognizer_OnHoldStartedEvent(InteractionSourceKind source, Ray headRay)
+        {
+            Debug.WriteLine("Hold started event");
+            StartHold();
+        }
+
+        private void GestureRecognizer_OnHoldCompletedEvent(InteractionSourceKind source, Ray headRay)
+        {
+            Debug.WriteLine("Hold stopped event");
+            StopHold();
         }
 
         void LateUpdate()
@@ -103,6 +136,8 @@ namespace HoloToolkit.Unity
         {
             gestureRecognizer.StopCapturingGestures();
             gestureRecognizer.TappedEvent -= GestureRecognizer_TappedEvent;
+            gestureRecognizer.HoldStartedEvent -= GestureRecognizer_OnHoldStartedEvent;
+            gestureRecognizer.HoldCompletedEvent -= GestureRecognizer_OnHoldCompletedEvent;
         }
     }
 }

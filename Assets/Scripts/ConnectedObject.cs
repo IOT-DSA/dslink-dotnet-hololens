@@ -1,7 +1,8 @@
 using UnityEngine;
-
+using Debug = System.Diagnostics.Debug;
 #if WINDOWS_UWP
 using DSLink.Nodes;
+using ValueType = DSLink.Nodes.ValueType;
 #endif
 
 namespace DSHoloLens
@@ -34,7 +35,7 @@ namespace DSHoloLens
         private float? sY;
         private float? sZ;
 
-        public void Start()
+        public virtual void Start()
         {
             rootNode = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild(DSANodeName).BuildNode();
 
@@ -144,7 +145,7 @@ namespace DSHoloLens
             };
         }
         
-        public void Update()
+        public virtual void Update()
         {
             if (doRotateDemo)
             {
@@ -235,6 +236,33 @@ namespace DSHoloLens
             }
             return path;
         }
+#else
+        public virtual void Start()
+        {
+        }
+
+        public virtual void Update()
+        {
+        }
 #endif
+
+        public virtual void OnSelect()
+        {
+        }
+
+        public virtual void OnHoldStart()
+        {
+        }
+
+        public virtual void OnHoldStop()
+        {
+        }
+
+        public virtual void OnVoiceRemove()
+        {
+            Debug.WriteLine("Removed object via voice.");
+            rootNode.RemoveFromParent();
+            Destroy(gameObject);
+        }
     }
 }

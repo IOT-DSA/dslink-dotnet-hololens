@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -33,7 +33,7 @@ namespace HoloToolkit.Unity
             if ((GazeManager.Instance.RaycastLayerMask & gameObject.layer) == 0)
             {
                 Debug.LogError("The cursor has a layer that is checked in the GazeManager's Raycast Layer Mask.  Change the cursor layer (e.g.: to Ignore Raycast) or uncheck the layer in GazeManager: " +
-                    LayerMask.LayerToName(this.gameObject.layer));
+                    LayerMask.LayerToName(gameObject.layer));
             }
 
             meshRenderer = this.gameObject.GetComponent<MeshRenderer>();
@@ -48,7 +48,7 @@ namespace HoloToolkit.Unity
             meshRenderer.enabled = false;
 
             // Cache the cursor default rotation so the cursor can be rotated with respect to the original orientation.
-            cursorDefaultRotation = this.gameObject.transform.rotation;
+            cursorDefaultRotation = gameObject.transform.rotation;
         }
 
         void LateUpdate()
