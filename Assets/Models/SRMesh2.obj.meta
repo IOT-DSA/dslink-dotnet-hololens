@@ -1,37 +1,24 @@
 fileFormatVersion: 2
-guid: 1e7d2c1a6c1705a4fbea297138415169
-timeCreated: 1472149244
+guid: 1f21aea94ed67fe4cb7d6ac34b79bffb
+timeCreated: 1472420592
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: screw1_default3
-    100002: screw2_default2
-    100004: //RootNode
-    100006: switchbase_default4
-    100008: switchbutton_default
-    100010: default
-    400000: screw1_default3
-    400002: screw2_default2
-    400004: //RootNode
-    400006: switchbase_default4
-    400008: switchbutton_default
-    400010: default
-    2300000: screw1_default3
-    2300002: screw2_default2
-    2300004: switchbase_default4
-    2300006: switchbutton_default
-    2300008: default
-    3300000: screw1_default3
-    3300002: screw2_default2
-    3300004: switchbase_default4
-    3300006: switchbutton_default
-    3300008: default
-    4300000: screw1_default3
-    4300002: screw2_default2
-    4300004: switchbase_default4
-    4300006: switchbutton_default
-    4300008: default
+    100000: default
+    100002: default_MeshPart0
+    100004: default_MeshPart1
+    100006: //RootNode
+    400000: default
+    400002: default_MeshPart0
+    400004: default_MeshPart1
+    400006: //RootNode
+    2300000: default_MeshPart0
+    2300002: default_MeshPart1
+    3300000: default_MeshPart0
+    3300002: default_MeshPart1
+    4300000: default_MeshPart0
+    4300002: default_MeshPart1
   materials:
     importMaterials: 1
     materialName: 0

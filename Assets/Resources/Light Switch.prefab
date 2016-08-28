@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000012130479312}
   - 65: {fileID: 65000010607460758}
   - 114: {fileID: 114000010023375584}
+  - 114: {fileID: 114000014232116508}
   m_Layer: 0
   m_Name: Light Switch
   m_TagString: Untagged
@@ -102,10 +103,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012342205508}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012130479312}
   m_RootOrder: 0
@@ -115,10 +116,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011681809270}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012130479312}
   m_RootOrder: 3
@@ -128,10 +129,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010784310166}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.913, y: 0.5, z: 2.5}
-  m_LocalScale: {x: 0.41100532, y: 0.41100532, z: 0.41100532}
-  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.838799, y: -2.9650233, z: 1.2893872}
+  m_LocalScale: {x: 0.6598824, y: 0.65988463, z: 0.65988463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010378606954}
   - {fileID: 4000013174673884}
@@ -145,10 +146,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011120588088}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012130479312}
   m_RootOrder: 1
@@ -158,10 +159,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011945558686}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
   m_Children: []
   m_Father: {fileID: 4000012130479312}
   m_RootOrder: 2
@@ -319,15 +320,15 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3030802, y: 0.27114913, z: 1.8768858}
-  m_Center: {x: -0.002676084, y: -0.043091718, z: -0.00081589597}
+  m_Size: {x: 0.32891467, y: 0.47099084, z: 0.07808003}
+  m_Center: {x: 0.0007460941, y: 0.0010438056, z: -0.029253654}
 --- !u!114 &114000010023375584
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010784310166}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aca4b0d582efc524f9af5d5f2a0bc5a2, type: 3}
   m_Name: 
@@ -335,3 +336,20 @@ MonoBehaviour:
   DSANodeName: ConnectedObject
   LightSwitchButton: {fileID: 1000011681809270}
   State: 0
+--- !u!114 &114000014232116508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010784310166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e5c6cfe306be6468f96c2a38a42c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlaceableBoundsMaterial: {fileID: 0}
+  NotPlaceableBoundsMaterial: {fileID: 0}
+  PlaceableShadowMaterial: {fileID: 0}
+  NotPlaceableShadowMaterial: {fileID: 0}
+  PlacementSurface: 2
+  ChildrenToHide: []
