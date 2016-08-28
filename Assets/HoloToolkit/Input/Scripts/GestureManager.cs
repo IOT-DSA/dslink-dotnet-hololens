@@ -21,6 +21,8 @@ namespace HoloToolkit.Unity
         /// </summary>
         public KeyCode EditorSelectKey = KeyCode.Space;
 
+        public GameObject Camera;
+
         /// <summary>
         /// To select even when a hologram is not being gazed at,
         /// set the override focused object.
@@ -85,7 +87,10 @@ namespace HoloToolkit.Unity
 
         private void OnTap()
         {
-            FocusedObject?.SendMessage("OnSelect");
+            if (FocusedObject != null)
+            {
+                FocusedObject.SendMessage("OnSelect");
+            }
         }
 
         private void GestureRecognizer_TappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
@@ -97,13 +102,19 @@ namespace HoloToolkit.Unity
         private void GestureRecognizer_OnHoldStartedEvent(InteractionSourceKind source, Ray headRay)
         {
             Debug.WriteLine("Hold started event");
-            FocusedObject?.SendMessage("OnHoldStart");
+            if (FocusedObject != null)
+            {
+                FocusedObject.SendMessage("OnHoldStart");
+            }
         }
 
         private void GestureRecognizer_OnHoldCompletedEvent(InteractionSourceKind source, Ray headRay)
         {
             Debug.WriteLine("Hold stopped event");
-            FocusedObject?.SendMessage("OnHoldStop");
+            if (FocusedObject != null)
+            {
+                FocusedObject.SendMessage("OnHoldStop");
+            }
         }
 
         private void GestureRecognizerOnManipulationStartedEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headRay)
@@ -122,9 +133,12 @@ namespace HoloToolkit.Unity
             if (FocusedObject != null)
             {
                 Manipulating = true;
-                Vector3 moveVector = cumulativeDelta - manipulationPreviousPosition;
+                var moveVector = cumulativeDelta - manipulationPreviousPosition;
                 manipulationPreviousPosition = cumulativeDelta;
                 FocusedObject.transform.position += moveVector;
+                /*var rotation = FocusedObject.transform.rotation;
+                rotation.y = Camera.transform.rotation.y;
+                FocusedObject.transform.rotation = rotation;*/
             }
         }
 
@@ -132,17 +146,19 @@ namespace HoloToolkit.Unity
         {
             Debug.WriteLine("Manipulation completed");
             Manipulating = false;
+            Transition(GestureRecognizer);
         }
 
         private void GestureRecognizerOnManipulationCanceledEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headRay)
         {
             Debug.WriteLine("Manipulation canceled");
             Manipulating = false;
+            Transition(GestureRecognizer);
         }
 
         private void LateUpdate()
         {
-            GameObject oldFocusedObject = FocusedObject;
+            var oldFocusedObject = FocusedObject;
 
             if (GazeManager.Instance.Hit &&
                 OverrideFocusedObject == null &&
@@ -162,8 +178,8 @@ namespace HoloToolkit.Unity
             {
                 // If the currently focused object doesn't match the old focused object, cancel the current gesture.
                 // Start looking for new gestures.  This is to prevent applying gestures from one hologram to another.
-                GestureRecognizer.CancelGestures();
-                GestureRecognizer.StartCapturingGestures();
+                ActiveRecognizer.CancelGestures();
+                ActiveRecognizer.StartCapturingGestures();
             }
 
 #if UNITY_EDITOR
@@ -174,16 +190,18 @@ namespace HoloToolkit.Unity
 #endif
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             GestureRecognizer.StopCapturingGestures();
             GestureRecognizer.TappedEvent -= GestureRecognizer_TappedEvent;
             GestureRecognizer.HoldStartedEvent -= GestureRecognizer_OnHoldStartedEvent;
             GestureRecognizer.HoldCompletedEvent -= GestureRecognizer_OnHoldCompletedEvent;
-            GestureRecognizer.ManipulationStartedEvent -= GestureRecognizerOnManipulationStartedEvent;
-            GestureRecognizer.ManipulationUpdatedEvent -= GestureRecognizerOnManipulationUpdatedEvent;
-            GestureRecognizer.ManipulationCompletedEvent -= GestureRecognizerOnManipulationCompletedEvent;
-            GestureRecognizer.ManipulationCanceledEvent -= GestureRecognizerOnManipulationCanceledEvent;
+
+            ManipulationRecognizer.StartCapturingGestures();
+            ManipulationRecognizer.ManipulationStartedEvent -= GestureRecognizerOnManipulationStartedEvent;
+            ManipulationRecognizer.ManipulationUpdatedEvent -= GestureRecognizerOnManipulationUpdatedEvent;
+            ManipulationRecognizer.ManipulationCompletedEvent -= GestureRecognizerOnManipulationCompletedEvent;
+            ManipulationRecognizer.ManipulationCanceledEvent -= GestureRecognizerOnManipulationCanceledEvent;
         }
     }
 }
