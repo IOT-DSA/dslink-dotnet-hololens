@@ -36,6 +36,11 @@ namespace DSHoloLens
                     Debug.WriteLine("Couldn't instantiate light switch");
                 }
             });
+
+            keywords.Add("move", () =>
+            {
+                GestureManager.Instance.Transition(GestureManager.Instance.ManipulationRecognizer);
+            });
     
             keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
             keywordRecognizer.OnPhraseRecognized += OnPhraseRecognized;
