@@ -261,7 +261,9 @@ namespace DSHoloLens
         public virtual void OnVoiceRemove()
         {
             Debug.WriteLine("Removed object via voice.");
+#if WINDOWS_UWP
             rootNode.RemoveFromParent();
+#endif
             Destroy(gameObject);
         }
     }

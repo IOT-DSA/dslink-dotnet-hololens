@@ -26,6 +26,8 @@ namespace DSHoloLens
             }
 
 #if WINDOWS_UWP
+            rootNode.DisplayName = "Light Switch";
+
             stateNode = rootNode.CreateChild("state")
                 .SetType(ValueType.Boolean)
                 .SetValue(State)

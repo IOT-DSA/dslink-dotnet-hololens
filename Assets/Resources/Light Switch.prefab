@@ -332,6 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca4b0d582efc524f9af5d5f2a0bc5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DSANodeName: LightSwitch
+  DSANodeName: ConnectedObject
   LightSwitchButton: {fileID: 1000011681809270}
-  State: 1
+  State: 0
