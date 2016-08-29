@@ -15,9 +15,10 @@
   - Unity C# Projects = true
 4. Click Build, create a new folder in the repository root named App, select that folder.
 5. After building, open the folder that it shows, and open the solution.
-6. In Visual Studio, open the configuration manager and ensure that DSHoloLens has both "Build" and "Deploy" checked.
-7. Change your run target to HoloLens Emulator 10.0.XXXXX.
-8. Click the run button.
+6. In the DSHoloLens project, replace the contents of App.cs with the contents of App.cs in the root of the repository.
+7. In Visual Studio, open the configuration manager and ensure that DSHoloLens has both "Build" and "Deploy" checked.
+8. Change your run target to HoloLens Emulator 10.0.XXXXX.
+9. Click the run button.
 
 ## Workflow
 ### Updated a scene in Unity
