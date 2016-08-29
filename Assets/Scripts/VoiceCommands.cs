@@ -10,6 +10,9 @@ namespace DSHoloLens
 {
     public class VoiceCommands : MonoBehaviour
     {
+        public GameObject SpaceCollection;
+        public GameObject Camera;
+
         private Dictionary<string, Action> keywords = new Dictionary<string, Action>();
         private KeywordRecognizer keywordRecognizer;
 
@@ -26,20 +29,16 @@ namespace DSHoloLens
 
             keywords.Add("add switch", () =>
             {
-                var lightSwitch = Instantiate(Resources.Load("Light Switch") as GameObject);
-                if (lightSwitch != null)
+                var switchObject = Instantiate(Resources.Load("Light Switch") as GameObject, Camera.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
+                if (switchObject != null)
                 {
-                    lightSwitch.GetComponent<LightSwitch>().DSANodeName = Guid.NewGuid().ToString();
-                }
-                else
-                {
-                    Debug.WriteLine("Couldn't instantiate light switch");
+                    switchObject.transform.parent = SpaceCollection.transform;
                 }
             });
 
             keywords.Add("move", () =>
             {
-                GestureManager.Instance.Transition(GestureManager.Instance.ManipulationRecognizer);
+                //GestureManager.Instance.Transition(GestureManager.Instance.ManipulationRecognizer);
             });
     
             keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());

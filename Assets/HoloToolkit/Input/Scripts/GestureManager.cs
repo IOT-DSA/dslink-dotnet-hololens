@@ -51,6 +51,7 @@ namespace HoloToolkit.Unity
             GestureRecognizer.TappedEvent += GestureRecognizer_TappedEvent;
             GestureRecognizer.HoldStartedEvent += GestureRecognizer_OnHoldStartedEvent;
             GestureRecognizer.HoldCompletedEvent += GestureRecognizer_OnHoldCompletedEvent;
+            GestureRecognizer.HoldCanceledEvent += GestureRecognizer_OnHoldCanceledEvent;
 
             ManipulationRecognizer = new GestureRecognizer();
             ManipulationRecognizer.SetRecognizableGestures(GestureSettings.ManipulationTranslate);
@@ -114,6 +115,15 @@ namespace HoloToolkit.Unity
             if (FocusedObject != null)
             {
                 FocusedObject.SendMessage("OnHoldStop");
+            }
+        }
+
+        private void GestureRecognizer_OnHoldCanceledEvent(InteractionSourceKind source, Ray headRay)
+        {
+            Debug.WriteLine("Hold canceled event");
+            if (FocusedObject != null)
+            {
+                FocusedObject.SendMessage("OnHoldCancel");
             }
         }
 

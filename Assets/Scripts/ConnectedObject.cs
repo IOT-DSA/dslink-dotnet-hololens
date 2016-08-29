@@ -9,9 +9,9 @@ namespace DSHoloLens
 {
     public class ConnectedObject : MonoBehaviour
     {
-        public string DSANodeName = "ConnectedObject";
-
 #if WINDOWS_UWP
+        private static int objNumber = 1;
+
         protected Node rootNode;
         protected Node doRotateDemoNode;
         protected Node positionX;
@@ -37,7 +37,8 @@ namespace DSHoloLens
 
         public virtual void Start()
         {
-            rootNode = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild(DSANodeName).BuildNode();
+            rootNode = HoloLensDSLink.Instance.Responder.SuperRoot.CreateChild("Object-" + objNumber).BuildNode();
+            objNumber++;
 
             rootNode.CreateChild("unityPath")
                 .SetType(ValueType.String)

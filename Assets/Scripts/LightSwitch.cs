@@ -43,8 +43,11 @@ namespace DSHoloLens
         public override void Update()
         {
             base.Update();
-            
-            LightSwitchButton.transform.localRotation = new Quaternion(0, State ? 180f : 0f, 0, 0);
+
+            if (LightSwitchButton != null)
+            {
+                LightSwitchButton.transform.localRotation = new Quaternion(0, State ? 270f : 90f, 0, 0);
+            }
         }
 
         public override void OnSelect()

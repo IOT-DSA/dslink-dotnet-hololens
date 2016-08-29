@@ -123,12 +123,8 @@ public class Placeable : MonoBehaviour
     /// Called when our object is selected.  Generally called by
     /// a gesture management component.
     /// </summary>
-    public void OnSelect()
+    /*public void OnSelect()
     {
-        /* TODO: 4.a CODE ALONG 4.a */
-
-        Debug.Log("here");
-
         if (!IsPlacing)
         {
             OnPlacementStart();
@@ -137,6 +133,21 @@ public class Placeable : MonoBehaviour
         {
             OnPlacementStop();
         }
+    }*/
+
+    public void OnHoldStart()
+    {
+        OnPlacementStart();
+    }
+
+    public void OnHoldStop()
+    {
+        OnPlacementStop();
+    }
+
+    public void OnHoldCancel()
+    {
+        OnPlacementStop();
     }
 
     /// <summary>
