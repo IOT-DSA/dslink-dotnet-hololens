@@ -137,17 +137,22 @@ public class Placeable : MonoBehaviour
 
     public void OnHoldStart()
     {
-        OnPlacementStart();
+        if (!IsPlacing)
+        {
+            OnPlacementStart();
+        }
+        else
+        {
+            OnPlacementStop();
+        }
     }
 
     public void OnHoldStop()
     {
-        OnPlacementStop();
     }
 
     public void OnHoldCancel()
     {
-        OnPlacementStop();
     }
 
     /// <summary>
@@ -259,14 +264,12 @@ public class Placeable : MonoBehaviour
                 // enough distance to the surface as the center point
                 if (!IsEquivalentDistance(centerHit.distance, hitInfo.distance))
                 {
-                    Debug.Log("Distance is not equal.");
                     return false;
                 }
             }
             else
             {
                 // The raycast failed to intersect with the target layer.
-                Debug.Log("Raycast failed to intersect with target layer");
                 return false;
             }
         }

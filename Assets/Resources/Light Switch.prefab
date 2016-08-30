@@ -333,7 +333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca4b0d582efc524f9af5d5f2a0bc5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DSANodeName: ConnectedObject
   LightSwitchButton: {fileID: 1000011681809270}
   State: 0
 --- !u!114 &114000014232116508
@@ -347,9 +346,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e5c6cfe306be6468f96c2a38a42c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlaceableBoundsMaterial: {fileID: 0}
-  NotPlaceableBoundsMaterial: {fileID: 0}
-  PlaceableShadowMaterial: {fileID: 0}
-  NotPlaceableShadowMaterial: {fileID: 0}
+  PlaceableBoundsMaterial: {fileID: 2100000, guid: 0bb493f30bc6db34ebabc03c8006d35c,
+    type: 2}
+  NotPlaceableBoundsMaterial: {fileID: 2100000, guid: ddcaf7674c2c4c544a5f63ebca97c201,
+    type: 2}
+  PlaceableShadowMaterial: {fileID: 2100000, guid: 1ced728bc7b4d2940a360fcd707108ac,
+    type: 2}
+  NotPlaceableShadowMaterial: {fileID: 2100000, guid: 69fa19d1404202a47a2ca649c6e09024,
+    type: 2}
   PlacementSurface: 2
   ChildrenToHide: []

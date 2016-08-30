@@ -29,7 +29,8 @@ namespace DSHoloLens
 
             keywords.Add("add switch", () =>
             {
-                var switchObject = Instantiate(Resources.Load("Light Switch") as GameObject, Camera.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
+                var pos = Camera.transform.position + Camera.transform.forward * 1f;
+                var switchObject = Instantiate(Resources.Load("Light Switch") as GameObject, pos, new Quaternion(0, 0, 0, 0)) as GameObject;
                 if (switchObject != null)
                 {
                     switchObject.transform.parent = SpaceCollection.transform;
