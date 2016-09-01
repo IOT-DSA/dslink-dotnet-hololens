@@ -22,7 +22,7 @@ namespace DSHoloLens
 
             if (LightSwitchButton == null)
             {
-                Debug.LogError("LightSwitchButton is null.");
+                HoloLensDSLink.Instance.Logger.Error("LightSwitchButton is null.");
             }
 
 #if WINDOWS_UWP
@@ -36,6 +36,7 @@ namespace DSHoloLens
             stateNode.Value.OnRemoteSet += value =>
             {
                 State = value.Boolean;
+                needsRotate = true;
             };
 #endif
         }
@@ -46,13 +47,18 @@ namespace DSHoloLens
 
             if (LightSwitchButton != null)
             {
-                LightSwitchButton.transform.localRotation = new Quaternion(0, State ? 270f : 90f, 0, 0);
+                if (needsRotate)
+                {
+                    LightSwitchButton.transform.Rotate(0, State ? 180f : -180f, 0, Space.Self);
+                    needsRotate = false;
+                }
             }
         }
 
         public override void OnSelect()
         {
             State = !State;
+            needsRotate = true;
 #if WINDOWS_UWP
             stateNode.Value.Set(State);
 #endif
