@@ -7,18 +7,22 @@
 ## Getting Started
 1. Clone this repository locally.
 2. Open the project in Unity HoloLens Technical Preview.
-3. File -> Build Settings...
+3. Open scene /Assets/Scenes/Main.unity
+4. File -> Build Settings...
+  - Click "Add Open Scenes" button
+  - Ensure Scenes/Main is checked
   - Select Windows Store
   - SDK = Universal 10
   - UWP Build Type = D3D
   - Build and Run on = Local Machine
   - Unity C# Projects = true
-4. Click Build, create a new folder in the repository root named App, select that folder.
-5. After building, open the folder that it shows, and open the solution.
-6. In the DSHoloLens project, replace the contents of App.cs with the contents of App.cs in the root of the repository.
-7. In Visual Studio, open the configuration manager and ensure that DSHoloLens has both "Build" and "Deploy" checked.
-8. Change your run target to HoloLens Emulator 10.0.XXXXX.
-9. Click the run button.
+5. Click Build, create a new folder in the repository root named App, select that folder.
+6. After building, open the folder that it shows, and open the solution.
+7. In the DSHoloLens project, replace the contents of App.cs with the contents of App.cs in the root of the repository.
+8. In Visual Studio, open the configuration manager and ensure that DSHoloLens has both "Build" and "Deploy" checked.
+9. Select Release and x86 as Configuration and Platform.
+10. Change your run target to HoloLens Emulator 10.0.XXXXX.
+11. Click the run button.
 
 ## Workflow
 ### Updated a scene in Unity
