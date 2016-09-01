@@ -40,3 +40,22 @@ Due to the way this project must be implemented to properly use .NET 4.5 and the
 #endif WINDOWS_UWP
 ```
 
+## Voice Commands
+### remove
+Removes the object that the player is currently looking at, as long as it implements the OnVoiceRemove method.
+
+### add switch
+Adds a switch to the scene, in front of the camera.
+
+### move
+Moves the object that the player is looking at, as long as it contains the Placeable component.
+
+### place
+Places an object that the player is currently holding.
+
+### activate
+Activates the object that the player is currently looking at, as long as it implements the OnVoiceActivate method.
+
+### deactivate
+Deactivates the object that the player is currently looking at, as long as it implements the OnVoiceDeactivate method.
+
