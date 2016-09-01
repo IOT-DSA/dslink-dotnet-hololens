@@ -155,6 +155,22 @@ public class Placeable : MonoBehaviour
     {
     }
 
+    public void OnVoiceMove()
+    {
+        if (!IsPlacing)
+        {
+            OnPlacementStart();
+        }
+    }
+
+    public void OnVoicePlace()
+    {
+        if (IsPlacing)
+        {
+            OnPlacementStop();
+        }
+    }
+
     /// <summary>
     /// Called once per frame.
     /// </summary>

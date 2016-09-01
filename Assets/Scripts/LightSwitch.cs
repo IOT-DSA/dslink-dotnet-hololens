@@ -20,12 +20,12 @@ namespace DSHoloLens
         {
             base.Start();
 
+#if WINDOWS_UWP
             if (LightSwitchButton == null)
             {
                 HoloLensDSLink.Instance.Logger.Error("LightSwitchButton is null.");
             }
 
-#if WINDOWS_UWP
             rootNode.DisplayName = "Light Switch";
 
             stateNode = rootNode.CreateChild("state")

@@ -15,6 +15,7 @@ namespace DSHoloLens
 
         private Dictionary<string, Action> keywords = new Dictionary<string, Action>();
         private KeywordRecognizer keywordRecognizer;
+        private GameObject heldObject;
 
         private void Start()
         {
@@ -39,7 +40,21 @@ namespace DSHoloLens
 
             keywords.Add("move", () =>
             {
-                //GestureManager.Instance.Transition(GestureManager.Instance.ManipulationRecognizer);
+                var focusObject = GazeManager.Instance.FocusedObject;
+                if (focusObject != null)
+                {
+                    heldObject = focusObject;
+                    focusObject.SendMessage("OnVoiceMove");
+                }
+            });
+
+            keywords.Add("place", () =>
+            {
+                if (heldObject != null)
+                {
+                    heldObject.SendMessage("OnVoicePlace");
+                    heldObject = null;
+                }
             });
     
             keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
