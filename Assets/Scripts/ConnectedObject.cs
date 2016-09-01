@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 #if WINDOWS_UWP
@@ -34,6 +35,9 @@ namespace DSHoloLens
         private float? sX;
         private float? sY;
         private float? sZ;
+
+        private float nextActionTime = 0.0f;
+        private float period = 0.1f;
 
         public virtual void Start()
         {
@@ -154,50 +158,61 @@ namespace DSHoloLens
                 transform.Rotate(Vector3.right, 25f * Time.deltaTime);
             }
 
-            var position = transform.position;
-            var rotation = transform.rotation;
-            var localScale = transform.localScale;
+            if (Time.time > nextActionTime)
+            {
+                nextActionTime = Time.time + period;
+                try
+                {
+                    var position = transform.position;
+                    var rotation = transform.rotation;
+                    var localScale = transform.localScale;
 
-            if (pX.HasValue || pY.HasValue || pZ.HasValue)
-            {
-                SetPosition();
-                pX = null;
-                pY = null;
-                pZ = null;
-            }
-            else
-            {
-                positionX.Value.Set(position.x);
-                positionY.Value.Set(position.y);
-                positionZ.Value.Set(position.z);
-            }
+                    if (pX.HasValue || pY.HasValue || pZ.HasValue)
+                    {
+                        SetPosition();
+                        pX = null;
+                        pY = null;
+                        pZ = null;
+                    }
+                    else
+                    {
+                        positionX.Value.Set(position.x);
+                        positionY.Value.Set(position.y);
+                        positionZ.Value.Set(position.z);
+                    }
 
-            if (rX.HasValue || rY.HasValue || rZ.HasValue)
-            {
-                SetRotation();
-                rX = null;
-                rY = null;
-                rZ = null;
-            }
-            else
-            {
-                rotX.Value.Set(rotation.x);
-                rotY.Value.Set(rotation.y);
-                rotZ.Value.Set(rotation.z);
-            }
+                    if (rX.HasValue || rY.HasValue || rZ.HasValue)
+                    {
+                        SetRotation();
+                        rX = null;
+                        rY = null;
+                        rZ = null;
+                    }
+                    else
+                    {
+                        rotX.Value.Set(rotation.x);
+                        rotY.Value.Set(rotation.y);
+                        rotZ.Value.Set(rotation.z);
+                    }
 
-            if (sX.HasValue || sY.HasValue || sZ.HasValue)
-            {
-                SetScale();
-                sX = null;
-                sY = null;
-                sZ = null;
-            }
-            else
-            {
-                scaleX.Value.Set(localScale.x);
-                scaleY.Value.Set(localScale.y);
-                scaleZ.Value.Set(localScale.z);
+                    if (sX.HasValue || sY.HasValue || sZ.HasValue)
+                    {
+                        SetScale();
+                        sX = null;
+                        sY = null;
+                        sZ = null;
+                    }
+                    else
+                    {
+                        scaleX.Value.Set(localScale.x);
+                        scaleY.Value.Set(localScale.y);
+                        scaleZ.Value.Set(localScale.z);
+                    }
+                }
+                catch (Exception e)
+                {
+                    HoloLensDSLink.Instance.Logger.Error("Exception occurred\n" + e.Message + "\n" + e.StackTrace);
+                }
             }
         }
         
