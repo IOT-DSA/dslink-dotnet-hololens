@@ -37,7 +37,7 @@ namespace DSHoloLens
         private float? sZ;
 
         private float nextActionTime = 0.0f;
-        private float period = 0.1f;
+        private float period = 0.01f;
 
         public virtual void Start()
         {

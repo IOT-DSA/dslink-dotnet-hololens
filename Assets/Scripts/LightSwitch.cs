@@ -55,13 +55,28 @@ namespace DSHoloLens
             }
         }
 
-        public override void OnSelect()
+        public void SetState(bool state)
         {
-            State = !State;
+            State = state;
             needsRotate = true;
 #if WINDOWS_UWP
             stateNode.Value.Set(State);
 #endif
+        }
+
+        public override void OnSelect()
+        {
+            SetState(!State);
+        }
+
+        public void OnVoiceActivate()
+        {
+            SetState(true);
+        }
+
+        public void OnVoiceDeactivate()
+        {
+            SetState(false);
         }
     }
 }

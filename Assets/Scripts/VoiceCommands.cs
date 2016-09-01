@@ -56,7 +56,25 @@ namespace DSHoloLens
                     heldObject = null;
                 }
             });
-    
+
+            keywords.Add("activate", () =>
+            {
+                var focusObject = GazeManager.Instance.FocusedObject;
+                if (focusObject != null)
+                {
+                    focusObject.SendMessage("OnVoiceActivate");
+                }
+            });
+
+            keywords.Add("deactivate", () =>
+            {
+                var focusObject = GazeManager.Instance.FocusedObject;
+                if (focusObject != null)
+                {
+                    focusObject.SendMessage("OnVoiceDeactivate");
+                }
+            });
+
             keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
             keywordRecognizer.OnPhraseRecognized += OnPhraseRecognized;
             keywordRecognizer.Start();
