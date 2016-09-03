@@ -43,7 +43,7 @@ namespace DSHoloLens
         private bool? newLabelHidden;
 
         private float nextActionTime = 0.0f;
-        private float period = 0.01f;
+        private float period = 0.05f;
 
         public virtual void Start()
         {

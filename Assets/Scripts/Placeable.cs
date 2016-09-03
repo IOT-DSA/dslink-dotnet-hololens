@@ -62,17 +62,17 @@ public class Placeable : MonoBehaviour
     private float hoverDistance = 0.15f;
 
     // Threshold (the closer to 0, the stricter the standard) used to determine if a surface is flat.
-    private float distanceThreshold = 0.02f;
+    private float distanceThreshold = 1.0f;
 
     // Threshold (the closer to 1, the stricter the standard) used to determine if a surface is vertical.
-    private float upNormalThreshold = 0.9f;
+    private float upNormalThreshold = 0.5f;
 
     // Maximum distance, from the object, that placement is allowed.
     // This is used when raycasting to see if the object is near a placeable surface.
     private float maximumPlacementDistance = 5.0f;
 
     // Speed (1.0 being fastest) at which the object settles to the surface upon placement.
-    private float placementVelocity = 0.06f;
+    private float placementVelocity = 0.1f;
 
     // Indicates whether or not this script manages the object's box collider.
     private bool managingBoxCollider = false;
