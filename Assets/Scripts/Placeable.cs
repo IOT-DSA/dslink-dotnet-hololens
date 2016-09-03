@@ -392,7 +392,21 @@ public class Placeable : MonoBehaviour
         // Check to see if we can exit placement mode.
         if (!ValidatePlacement(out position, out surfaceNormal))
         {
-            return;
+            //return;
+            position = gameObject.transform.position;
+            surfaceNormal = Vector3.zero;
+            RaycastHit hitInfo;
+
+            bool hit = Physics.Raycast(Camera.main.transform.position,
+                                    Camera.main.transform.forward,
+                                    out hitInfo,
+                                    20f,
+                                    SpatialMappingManager.Instance.LayerMask);
+
+            if (hit)
+            {
+                surfaceNormal = hitInfo.normal;
+            }
         }
 
         // The object is allowed to be placed.
