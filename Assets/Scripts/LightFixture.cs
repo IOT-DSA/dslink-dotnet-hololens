@@ -84,26 +84,14 @@ namespace DSHoloLens
             }
         }
 
-        public void SetState(bool state)
-        {
-#if WINDOWS_UWP
-            //_stateNode.Value.Set(state);
-#endif
-        }
-
-        public override void OnSelect()
-        {
-            //SetState(!State);
-        }
-
         public void OnVoiceActivate()
         {
-            SetState(true);
+            _newIntensity = 1.0f;
         }
 
         public void OnVoiceDeactivate()
         {
-            SetState(false);
+            _newIntensity = 0.0f;
         }
     }
 }
