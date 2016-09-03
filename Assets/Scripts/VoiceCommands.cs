@@ -15,7 +15,7 @@ namespace DSHoloLens
 
         private Dictionary<string, Action> keywords = new Dictionary<string, Action>();
         private KeywordRecognizer keywordRecognizer;
-        private GameObject heldObject;
+        public static GameObject HeldObject;
 
         private void Start()
         {
@@ -38,22 +38,33 @@ namespace DSHoloLens
                 }
             });
 
+            keywords.Add("add light", () =>
+            {
+                var pos = Camera.transform.position + Camera.transform.forward*1f;
+                var switchObject =
+                    Instantiate(Resources.Load("Light") as GameObject, pos, new Quaternion(180, 0, 0, 0)) as
+                        GameObject;
+                if (switchObject != null)
+                {
+                    switchObject.transform.parent = SpaceCollection.transform;
+                }
+            });
+
             keywords.Add("move", () =>
             {
                 var focusObject = GazeManager.Instance.FocusedObject;
                 if (focusObject != null)
                 {
-                    heldObject = focusObject;
+                    HeldObject = focusObject;
                     focusObject.SendMessage("OnVoiceMove");
                 }
             });
 
             keywords.Add("place", () =>
             {
-                if (heldObject != null)
+                if (HeldObject != null)
                 {
-                    heldObject.SendMessage("OnVoicePlace");
-                    heldObject = null;
+                    HeldObject.SendMessage("OnVoicePlace");
                 }
             });
 

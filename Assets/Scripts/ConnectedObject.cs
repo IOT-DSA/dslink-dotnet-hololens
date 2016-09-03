@@ -10,6 +10,8 @@ namespace DSHoloLens
 {
     public class ConnectedObject : MonoBehaviour
     {
+        public TextMesh TextMesh;
+
 #if WINDOWS_UWP
         private static int objNumber = 1;
 
@@ -24,6 +26,7 @@ namespace DSHoloLens
         protected Node scaleX;
         protected Node scaleY;
         protected Node scaleZ;
+        protected Node textNode;
 
         private bool doRotateDemo;
         private float? pX;
@@ -35,6 +38,7 @@ namespace DSHoloLens
         private float? sX;
         private float? sY;
         private float? sZ;
+        private string newLabelText;
 
         private float nextActionTime = 0.0f;
         private float period = 0.01f;
@@ -148,6 +152,19 @@ namespace DSHoloLens
             {
                 sZ = value.Float;
             };
+
+            if (TextMesh != null)
+            {
+                textNode = rootNode.CreateChild("labelText")
+                    .SetType(ValueType.String)
+                    .SetValue(TextMesh.text)
+                    .SetWritable(Permission.Write)
+                    .BuildNode();
+                textNode.Value.OnRemoteSet += value =>
+                {
+                    newLabelText = value.String;
+                };
+            }
         }
         
         public virtual void Update()
@@ -212,6 +229,11 @@ namespace DSHoloLens
                 catch (Exception e)
                 {
                     HoloLensDSLink.Instance.Logger.Error("Exception occurred\n" + e.Message + "\n" + e.StackTrace);
+                }
+                if (newLabelText != null && TextMesh != null)
+                {
+                    TextMesh.text = newLabelText;
+                    newLabelText = null;
                 }
             }
         }

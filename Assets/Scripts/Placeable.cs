@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using DSHoloLens;
 using UnityEngine;
 using HoloToolkit.Unity;
+using Debug = System.Diagnostics.Debug;
 
 /// <summary>
 /// Enumeration containing the surfaces on which a GameObject
@@ -168,6 +170,10 @@ public class Placeable : MonoBehaviour
         if (IsPlacing)
         {
             OnPlacementStop();
+            if (!IsPlacing)
+            {
+                VoiceCommands.HeldObject = null;
+            }
         }
     }
 
@@ -228,7 +234,6 @@ public class Placeable : MonoBehaviour
     private bool ValidatePlacement(out Vector3 position, out Vector3 surfaceNormal)
     {
         Vector3 raycastDirection = gameObject.transform.forward;
-        Debug.DrawLine(gameObject.transform.position, gameObject.transform.forward);
 
         if (PlacementSurface == PlacementSurfaces.Horizontal)
         {
@@ -259,6 +264,7 @@ public class Placeable : MonoBehaviour
                         SpatialMappingManager.Instance.LayerMask))
         {
             // If the ray failed to hit the surface, we are done.
+            Debug.WriteLine("Failed to hit surface");
             return false;
         }
 
@@ -280,12 +286,14 @@ public class Placeable : MonoBehaviour
                 // enough distance to the surface as the center point
                 if (!IsEquivalentDistance(centerHit.distance, hitInfo.distance))
                 {
+                    Debug.WriteLine("Not equivalent distance");
                     return false;
                 }
             }
             else
             {
                 // The raycast failed to intersect with the target layer.
+                Debug.WriteLine("Failed to intersect with target layer");
                 return false;
             }
         }

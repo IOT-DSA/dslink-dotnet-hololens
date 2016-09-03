@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1e4b48f5c936740b90667b79f050ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limitScanningByTime: 1
+  limitScanningByTime: 0
   scanTime: 30
   defaultMaterial: {fileID: 2100000, guid: 14b6f64c715aedc4283d3d83ae94cea1, type: 2}
   secondaryMaterial: {fileID: 2100000, guid: 14b6f64c715aedc4283d3d83ae94cea1, type: 2}
@@ -555,10 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1899a64882f86374bb12516f554132b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceObjectPrefabs:
-  - {fileID: 1000010784310166, guid: 280c3447a61b5f64bbfc5697032fa758, type: 2}
-  - {fileID: 1000010784310166, guid: 280c3447a61b5f64bbfc5697032fa758, type: 2}
-  - {fileID: 1000010784310166, guid: 280c3447a61b5f64bbfc5697032fa758, type: 2}
+  spaceObjectPrefabs: []
 --- !u!4 &2104385893
 Transform:
   m_ObjectHideFlags: 0
