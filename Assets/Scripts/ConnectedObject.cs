@@ -27,6 +27,7 @@ namespace DSHoloLens
         protected Node scaleY;
         protected Node scaleZ;
         protected Node textNode;
+        protected Node textHiddenNode;
 
         private bool doRotateDemo;
         private float? pX;
@@ -38,7 +39,8 @@ namespace DSHoloLens
         private float? sX;
         private float? sY;
         private float? sZ;
-        private string newLabelText;
+        private string newLabelText = "Label";
+        private bool? newLabelHidden;
 
         private float nextActionTime = 0.0f;
         private float period = 0.01f;
@@ -164,6 +166,16 @@ namespace DSHoloLens
                 {
                     newLabelText = value.String;
                 };
+
+                textHiddenNode = rootNode.CreateChild("labelHidden")
+                    .SetType(ValueType.Boolean)
+                    .SetValue(false)
+                    .SetWritable(Permission.Write)
+                    .BuildNode();
+                textHiddenNode.Value.OnRemoteSet += value =>
+                {
+                    newLabelHidden = value.Boolean;
+                };
             }
         }
         
@@ -230,10 +242,15 @@ namespace DSHoloLens
                 {
                     HoloLensDSLink.Instance.Logger.Error("Exception occurred\n" + e.Message + "\n" + e.StackTrace);
                 }
-                if (newLabelText != null && TextMesh != null)
+                if (TextMesh != null && newLabelText != null && !newLabelText.Equals(TextMesh.text))
                 {
                     TextMesh.text = newLabelText;
                     newLabelText = null;
+                }
+                if (newLabelHidden.HasValue && TextMesh != null)
+                {
+                    TextMesh.GetComponent<Renderer>().enabled = !newLabelHidden.Value;
+                    newLabelHidden = null;
                 }
             }
         }

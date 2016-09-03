@@ -504,5 +504,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d577b6092643e947bc8324a81ea93cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextMesh: {fileID: 0}
+  TextMesh: {fileID: 102000011829802324}
   Bulb: {fileID: 1000012883154642}

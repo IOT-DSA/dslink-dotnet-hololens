@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca4b0d582efc524f9af5d5f2a0bc5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextMesh: {fileID: 0}
+  TextMesh: {fileID: 102000010880802866}
   LightSwitchButton: {fileID: 1000011681809270}
   State: 0
 --- !u!114 &114000014232116508
