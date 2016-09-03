@@ -15,7 +15,7 @@ public enum PlacementSurfaces
     Horizontal = 1,
 
     // Vertical surface with a normal facing the user.
-    Vertical = 2,
+    Vertical = 2
 }
 
 /// <summary>
@@ -65,7 +65,7 @@ public class Placeable : MonoBehaviour
     private float distanceThreshold = 1.0f;
 
     // Threshold (the closer to 1, the stricter the standard) used to determine if a surface is vertical.
-    private float upNormalThreshold = 0.5f;
+    private float upNormalThreshold = 0.0f;
 
     // Maximum distance, from the object, that placement is allowed.
     // This is used when raycasting to see if the object is near a placeable surface.
@@ -239,7 +239,7 @@ public class Placeable : MonoBehaviour
         {
             // Placing on horizontal surfaces.
             // Raycast from the bottom face of the box collider.
-            raycastDirection = -(Vector3.up);
+            raycastDirection = -Vector3.up;
         }
 
         // Initialize out parameters.
@@ -268,7 +268,7 @@ public class Placeable : MonoBehaviour
             return false;
         }
 
-        // We have found a surface.  Set position and surfaceNormal.
+        // We have found a surface. Set position and surfaceNormal.
         position = centerHit.point;
         surfaceNormal = centerHit.normal;
 
@@ -500,6 +500,7 @@ public class Placeable : MonoBehaviour
         }
         else
         {
+
             rotation.x = 0f;
             rotation.z = 0f;
         }
