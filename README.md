@@ -56,9 +56,9 @@ Moves the object that the player is looking at, as long as it contains the Place
 ### place
 Places an object that the player is currently holding.
 
-### activate
+### on
 Activates the object that the player is currently looking at, as long as it implements the OnVoiceActivate method.
 
-### deactivate
+### off
 Deactivates the object that the player is currently looking at, as long as it implements the OnVoiceDeactivate method.
 

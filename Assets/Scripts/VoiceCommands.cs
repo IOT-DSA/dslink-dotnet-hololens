@@ -68,7 +68,7 @@ namespace DSHoloLens
                 }
             });
 
-            keywords.Add("activate", () =>
+            keywords.Add("on", () =>
             {
                 var focusObject = GazeManager.Instance.FocusedObject;
                 if (focusObject != null)
@@ -77,7 +77,7 @@ namespace DSHoloLens
                 }
             });
 
-            keywords.Add("deactivate", () =>
+            keywords.Add("off", () =>
             {
                 var focusObject = GazeManager.Instance.FocusedObject;
                 if (focusObject != null)
