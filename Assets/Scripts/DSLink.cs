@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using DSLink.Util.Logger;
 using DSLink;
+using DSLink.Nodes;
+using DSLink.Nodes.Actions;
+using UnityEngine;
 using DebugLog = System.Diagnostics.Debug;
 
 namespace DSHoloLens
@@ -17,6 +20,41 @@ namespace DSHoloLens
 #endif
             ))
         {
+            Responder.AddNodeClass("createSwitchAction", node =>
+            {
+                node.DisplayName = "Create Switch";
+                node.SetAction(new ActionHandler(Permission.Write, async request =>
+                {
+                    MainThreadManager.Instance().Enqueue(() =>
+                    {
+                        if (Camera.main != null)
+                        {
+                            var pos = Camera.main.transform.position + Camera.main.transform.forward * 1f;
+                            Object.Instantiate(Resources.Load("Light Switch") as GameObject, pos, new Quaternion(0, 0, 0, 0));
+                        }
+                    });
+
+                    await request.Close();
+                }));
+            });
+
+            Responder.AddNodeClass("createLightAction", node =>
+            {
+                node.DisplayName = "Create Light";
+                node.SetAction(new ActionHandler(Permission.Write, async request =>
+                {
+                    MainThreadManager.Instance().Enqueue(() =>
+                    {
+                        if (Camera.main != null)
+                        {
+                            var pos = Camera.main.transform.position + Camera.main.transform.forward * 1f;
+                            Object.Instantiate(Resources.Load("Light") as GameObject, pos, new Quaternion(0, 0, 0, 0));
+                        }
+                    });
+
+                    await request.Close();
+                }));
+            });
         }
 
         public static void Start()
@@ -25,6 +63,12 @@ namespace DSHoloLens
             BaseLogger.Logger = typeof(DiagLogger);
             Instance = new HoloLensDSLink();
             Instance.Connect().Wait();
+        }
+
+        public override void InitializeDefaultNodes()
+        {
+            Responder.SuperRoot.CreateChild("createSwitch", "createSwitchAction").BuildNode();
+            Responder.SuperRoot.CreateChild("createLight", "createLightAction").BuildNode();
         }
     }
 
