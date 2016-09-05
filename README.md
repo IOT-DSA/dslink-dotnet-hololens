@@ -50,6 +50,9 @@ Adds a switch to the scene, in front of the camera.
 ### add light
 Adds a light to the scene, in front of the camera.
 
+### add square light
+Adds a square light to the scene, in front of the camera.
+
 ### move
 Moves the object that the player is looking at, as long as it contains the Placeable component.
 

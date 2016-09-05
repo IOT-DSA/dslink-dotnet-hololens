@@ -87,11 +87,17 @@ namespace DSHoloLens
         public void OnVoiceActivate()
         {
             _newIntensity = 1.0f;
+#if WINDOWS_UWP
+            _intensityNode.Value.Set(1.0f);
+#endif
         }
 
         public void OnVoiceDeactivate()
         {
             _newIntensity = 0.0f;
+#if WINDOWS_UWP
+            _intensityNode.Value.Set(0.0f);
+#endif
         }
     }
 }

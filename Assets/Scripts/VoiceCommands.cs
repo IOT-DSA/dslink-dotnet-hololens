@@ -50,11 +50,18 @@ namespace DSHoloLens
                 }
             });
 
+            keywords.Add("add square light", () =>
+            {
+                var pos = Camera.transform.position + Camera.transform.forward * 1f;
+                Instantiate(Resources.Load("Light Square") as GameObject, pos, new Quaternion(180, 0, 0, 0));
+            });
+
             keywords.Add("move", () =>
             {
                 var focusObject = GazeManager.Instance.FocusedObject;
                 if (focusObject != null)
                 {
+                    Debug.WriteLine(focusObject.name);
                     HeldObject = focusObject;
                     focusObject.SendMessage("OnVoiceMove");
                 }
@@ -73,6 +80,7 @@ namespace DSHoloLens
                 var focusObject = GazeManager.Instance.FocusedObject;
                 if (focusObject != null)
                 {
+                    Debug.WriteLine(focusObject.name);
                     focusObject.SendMessage("OnVoiceActivate");
                 }
             });
@@ -82,6 +90,7 @@ namespace DSHoloLens
                 var focusObject = GazeManager.Instance.FocusedObject;
                 if (focusObject != null)
                 {
+                    Debug.WriteLine(focusObject.name);
                     focusObject.SendMessage("OnVoiceDeactivate");
                 }
             });

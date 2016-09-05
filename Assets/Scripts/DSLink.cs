@@ -55,6 +55,24 @@ namespace DSHoloLens
                     await request.Close();
                 }));
             });
+
+            Responder.AddNodeClass("createSquareLightAction", node =>
+            {
+                node.DisplayName = "Create Square Light";
+                node.SetAction(new ActionHandler(Permission.Write, async request =>
+                {
+                    MainThreadManager.Instance().Enqueue(() =>
+                    {
+                        if (Camera.main != null)
+                        {
+                            var pos = Camera.main.transform.position + Camera.main.transform.forward * 1f;
+                            Object.Instantiate(Resources.Load("Light Square") as GameObject, pos, new Quaternion(0, 0, 0, 0));
+                        }
+                    });
+
+                    await request.Close();
+                }));
+            });
         }
 
         public static void Start()
@@ -69,6 +87,7 @@ namespace DSHoloLens
         {
             Responder.SuperRoot.CreateChild("createSwitch", "createSwitchAction").BuildNode();
             Responder.SuperRoot.CreateChild("createLight", "createLightAction").BuildNode();
+            Responder.SuperRoot.CreateChild("createSquareLight", "createSquareLightAction").BuildNode();
         }
     }
 

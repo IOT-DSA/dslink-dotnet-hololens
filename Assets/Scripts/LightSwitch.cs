@@ -57,8 +57,11 @@ namespace DSHoloLens
 
         public void SetState(bool state)
         {
+            if (State == !state)
+            {
+                needsRotate = true;
+            }
             State = state;
-            needsRotate = true;
 #if WINDOWS_UWP
             stateNode.Value.Set(State);
 #endif
