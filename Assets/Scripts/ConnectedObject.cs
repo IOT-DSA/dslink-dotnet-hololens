@@ -4,6 +4,7 @@ using Debug = System.Diagnostics.Debug;
 #if WINDOWS_UWP
 using DSLink.Nodes;
 using ValueType = DSLink.Nodes.ValueType;
+using DSLink.Nodes.Actions;
 #endif
 
 namespace DSHoloLens
@@ -177,6 +178,19 @@ namespace DSHoloLens
                     newLabelHidden = value.Boolean;
                 };
             }
+
+            rootNode.CreateChild("removeObject")
+                .SetDisplayName("Remove Object")
+                .SetAction(new ActionHandler(Permission.Write, async request =>
+                {
+                    MainThreadManager.Instance().Enqueue(() =>
+                    {
+                        OnVoiceRemove();
+                    });
+
+                    await request.Close();
+                }))
+                .BuildNode();
         }
         
         public virtual void Update()
