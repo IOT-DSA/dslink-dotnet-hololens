@@ -35,8 +35,11 @@ namespace DSHoloLens
                 .BuildNode();
             stateNode.Value.OnRemoteSet += value =>
             {
-                State = value.Boolean;
-                needsRotate = true;
+                if (State != value.Boolean)
+                {
+                    State = value.Boolean;
+                    needsRotate = true;
+                }
             };
 #endif
         }
